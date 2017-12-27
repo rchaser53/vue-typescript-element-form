@@ -1,7 +1,8 @@
  <template>
   <el-form ref="form" :model="form" label-width="120px">
     <el-form-item label="Activity name">
-      <el-input v-on:change="changeInput" v-on:value="name"></el-input>
+      <!-- <el-input v-on:change="changeInput" v-on:default-value="name"  v-on:value="name"></el-input> -->
+      <input v-on:change="changeInput" v-bind:value="name" />
     </el-form-item>
   </el-form>
 </template>
@@ -10,6 +11,7 @@
 import Vue from 'vue'
 import { mapActions } from 'vuex'
 import Component from 'vue-class-component'
+import { parseSessionStorageValue } from './store/mutations'
 import {
   Form,
   FormItem,
@@ -44,13 +46,11 @@ export default class ElForm extends Vue {
     }
   }
 
-  changeInput(value: any) {
-    this.$store.dispatch('changeFormState', { name: value})
+  changeInput(event: any) {
+    this.$store.dispatch('changeFormState', { name: event.target.value })
   }
 
-  mounted() {
-    console.log(234)
-  }
+  mounted() {}
 
   methods = {
     onSubmit() {
