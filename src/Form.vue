@@ -1,8 +1,8 @@
  <template>
   <el-form ref="form" :model="form" label-width="120px">
     <el-form-item label="Activity name">
-      <!-- <el-input v-on:change="changeInput" v-on:default-value="name"  v-on:value="name"></el-input> -->
-      <input v-on:change="changeInput" v-bind:value="name" />
+      <label for="nameInput">name</label>
+      <input id="nameInput" v-on:change="changeInput" v-bind:value="name" />
     </el-form-item>
   </el-form>
 </template>
@@ -17,6 +17,13 @@ import {
   FormItem,
   Input
 } from 'element-ui'
+
+export interface Event {
+  target: {
+    value: any,
+    id: string
+  }
+}
 
 @Component({
   components: {
@@ -46,8 +53,8 @@ export default class ElForm extends Vue {
     }
   }
 
-  changeInput(event: any) {
-    this.$store.dispatch('changeFormState', { name: event.target.value })
+  changeInput(event: Event) {
+    this.$store.dispatch('changeFormState', { [event.target.id]: event.target.value })
   }
 
   mounted() {}
