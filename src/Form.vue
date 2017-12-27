@@ -1,7 +1,7 @@
  <template>
   <el-form ref="form" :model="form" label-width="120px">
     <el-form-item label="Activity name">
-      <el-input v-on:change="changeInput"></el-input>
+      <el-input v-on:change="changeInput" v-on:value="name"></el-input>
     </el-form-item>
   </el-form>
 </template>
@@ -56,6 +56,10 @@ export default class ElForm extends Vue {
     onSubmit() {
       console.log('submit!');
     }
+  }
+
+  get name() {
+    return this.$store.state.form.name || ''
   }
 
 }

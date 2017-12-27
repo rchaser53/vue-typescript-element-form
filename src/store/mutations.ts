@@ -1,9 +1,9 @@
 export const state = {
-  form: sessionStorage.sampleForm
+  form: sessionStorage.sampleForm || {}
 }
 
 export const mutations = {
-  changeFormState (state, value) {
-    state.form = { ...state.form, value }
+  changeFormState (state, obj) {
+    state.form = { ...state.form, ...obj }
   }
 }
