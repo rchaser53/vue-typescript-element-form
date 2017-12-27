@@ -9,18 +9,22 @@
     "npm": ">=3"
   },
   "scripts": {
-    "build": "tsc -p . && webpack"
+    "build": "tsc -p . && webpack",
+    "server": "webpack-dev-server"
   },
   "dependencies": {
     "axios": "~0.17.1",
     "vue": "~2.5.8",
     "vue-class-component": "~6.1.0",
-    "vue-router": "~3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@types/node": "~8.0.53",
     "cross-env": "~5.1.1",
     "css-loader": "^0.28.7",
+    "element-theme-chalk": "^2.0.9",
+    "element-ui": "^2.0.9",
     "style-loader": "^0.19.0",
     "ts-loader": "^3.2.0",
     "tslint": "~5.8.0",
@@ -30,6 +34,6 @@
     "vue-loader": "^13.6.1",
     "vue-template-compiler": "^2.5.13",
     "webpack": "~3.8.1",
-    "webpack-dev-server": "~2.9.4"
+    "webpack-dev-server": "^2.9.7"
   }
 }

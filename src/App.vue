@@ -7,6 +7,7 @@
     <p>computed msg: {{computedMsg}}</p>
     <button @click="greet">Greet</button>
     <hello ref="helloComponent"></hello>
+    <el-form></el-form>
   </div>
 </template>
 
@@ -14,13 +15,15 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import Hello from './Hello.vue';
+import Form from './Form.vue';
 
 @Component({
   props: {
     propMessage: String
   },
   components: {
-    Hello
+    Hello,
+    'el-form': Form
   }
 })
 export default class App extends Vue {
@@ -33,7 +36,6 @@ export default class App extends Vue {
   // use prop values for initial data
   helloMsg: string = 'Hello, ' + this.propMessage
 
-  // lifecycle hook
   mounted () {
     this.greet()
   }
@@ -43,9 +45,7 @@ export default class App extends Vue {
     return 'computed ' + this.msg
   }
 
-  // method
   greet () {
-    alert('greeting: ' + this.msg)
     this.$refs.helloComponent.sayHello()
   }
 
