@@ -7,7 +7,7 @@ module.exports = {
     filename: 'build.js'
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js', '.css']
   },
   module: {
     rules: [
@@ -19,6 +19,8 @@ module.exports = {
           appendTsSuffixTo: [/\.vue$/]
         }
       },
+      { test: /(\.css$)/, loaders: ['style-loader', 'css-loader'] },
+      { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
