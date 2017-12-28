@@ -1,9 +1,7 @@
  <template>
   <el-form ref="form" :model="form" label-width="120px">
-    <el-form-item label="Activity name">
-      <el-form-item  name="nameInput" label="name">
-        <el-input v-on:change="setName" v-bind:value="name"></el-input>
-      </el-form-item>
+    <el-form-item for="name" label="name" style="display:flex;" >
+      <el-input id="name" v-on:change="setName" placeholder="Please input" v-bind:value="name"></el-input>
     </el-form-item>
   </el-form>
 </template>
