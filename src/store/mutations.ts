@@ -8,6 +8,8 @@ export const state = {
   form: parseSessionStorageValue('sampleForm')
 }
 
+// sessionStorage.clear()
+
 export const mutations = {
   changeFormState (state, obj) {
     state.form = { ...state.form, ...obj }
