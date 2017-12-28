@@ -1,8 +1,9 @@
  <template>
   <el-form ref="form" :model="form" label-width="120px">
     <el-form-item label="Activity name">
-      <label for="nameInput">name</label>
-      <input id="nameInput" v-on:change="changeInput" v-bind:value="name" />
+      <el-form-item  name="nameInput" label="name">
+        <el-input v-on:change="setName" v-bind:value="name"></el-input>
+      </el-form-item>
     </el-form-item>
   </el-form>
 </template>
@@ -18,10 +19,9 @@ import {
   Input
 } from 'element-ui'
 
-export interface Event {
-  target: {
-    value: any,
-    id: string
+const createInputSetter = function(key: string) {
+  return function(this: any, value: any) {
+    this.$store.dispatch('changeFormState', { [key]: value })
   }
 }
 
@@ -35,6 +35,7 @@ export interface Event {
     ...mapActions([
       'changeFormState',
     ]),
+    setName: createInputSetter('name')
   }
 })
 export default class ElForm extends Vue {
@@ -52,12 +53,6 @@ export default class ElForm extends Vue {
       }
     }
   }
-
-  changeInput(event: Event) {
-    this.$store.dispatch('changeFormState', { [event.target.id]: event.target.value })
-  }
-
-  mounted() {}
 
   methods = {
     onSubmit() {
