@@ -1,7 +1,8 @@
  <template>
-  <el-form ref="form" :label-position="'left'" :model="form" label-width="120px">
-    <el-form-item for="name" label="name" >
-      <el-input id="name" v-on:change="setName" placeholder="Please input" v-bind:value="name"></el-input>
+  <el-form ref="form" v-bind:label-position="'left'" v-bind:rules="rules" :model="form" label-width="120px">
+    <el-form-item for="name" label="form.name" prop="name" >
+      <el-input id="name" v-model="form.name" v-on:input="setName"
+          placeholder="Please input" v-bind:value="form.name"></el-input>
     </el-form-item>
   </el-form>
 </template>
@@ -42,27 +43,19 @@ export default class ElForm extends Vue {
   data() {
     return {
       form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
+        name: ''
+      },
+      rules: {
+        name: [
+          { required: true, message: 'Please input Activity name', trigger: 'blur' },
+          { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
+        ]
       }
     }
   }
 
-  methods = {
-    onSubmit() {
-      console.log('submit!');
-    }
+  mounted() {
+    Vue.set(this, 'form', Object.assign({}, this.$store.state.form))
   }
-
-  get name() {
-    return this.$store.state.form.name || ''
-  }
-
 }
 </script>
