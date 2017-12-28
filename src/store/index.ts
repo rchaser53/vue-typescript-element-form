@@ -10,5 +10,6 @@ export default new Vuex.Store({
   actions,
   state,
   mutations,
+  strict: process.env.NODE_ENV !== 'production',
   // plugins
 })
