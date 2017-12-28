@@ -4,6 +4,11 @@
       <el-input id="name" v-model="form.name" v-on:input="setName"
           placeholder="Please input" v-bind:value="form.name"></el-input>
     </el-form-item>
+
+    <el-form-item for="nyan" label="form.nyan" prop="nyan" >
+      <el-input-number id="nyan" v-model="form.nyan" v-on:input="setNyan"
+          placeholder="Please input" v-bind:value="form.nyan"></el-input-number>
+    </el-form-item>
   </el-form>
 </template>
 
@@ -17,7 +22,8 @@ import { parseSessionStorageValue } from './store/mutations'
 import {
   Form,
   FormItem,
-  Input
+  Input,
+  InputNumber
 } from 'element-ui'
 
 const createInputSetter = function(key: string) {
@@ -30,25 +36,41 @@ const createInputSetter = function(key: string) {
   components: {
     'el-form': Form,
     'el-form-item': FormItem,
-    'el-input': Input
+    'el-input': Input,
+    'el-input-number': InputNumber
   },
   methods: {
     ...mapActions([
       'changeFormState',
     ]),
-    setName: createInputSetter('name')
+    setName: createInputSetter('name'),
+    setNyan: createInputSetter('nyan'),
   }
 })
 export default class ElForm extends Vue {
   data() {
+    var checkNyan = (rule, value, callback) => {
+      console.log(value, 123)
+      setTimeout(() => {
+        if (value !== 28)  callback(new Error("why don't you nyan"));
+
+        callback();
+      }, 1000);
+    }
+
     return {
       form: {
-        name: ''
+        name: '',
+        nyan: 0
       },
       rules: {
         name: [
           { required: true, message: 'Please input Activity name', trigger: 'blur' },
           { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
+        ],
+        nyan: [
+          { required: true, message: 'Please input Activity name', trigger: 'blur' },
+          { validator: checkNyan, trigger: 'blur' }
         ]
       }
     }
