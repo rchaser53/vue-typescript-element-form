@@ -1,4 +1,5 @@
  <template>
+ <div>
   <el-form ref="form" v-bind:label-position="'left'" v-bind:rules="rules" :model="form" label-width="120px">
     <el-form-item for="name" label="name" prop="name" >
       <el-input id="name" v-model="form.name" v-on:input="setName"
@@ -6,10 +7,12 @@
     </el-form-item>
 
     <el-form-item for="price" label="price" prop="price" >
-      <el-input-number id="price" v-model="form.price" v-on:input="setPrice" v-on:change="nyan"
+      <el-input-number id="price" v-model="form.price" v-on:input="setPrice" 
           placeholder="Please input" v-bind:value="form.price"></el-input-number>
     </el-form-item>
   </el-form>
+  <button @click="validateForm">validate</button>
+</div>
 </template>
 
 <script lang="ts">
@@ -65,6 +68,14 @@ export default class InputForm extends Vue {
         ]
       }
     }
+  }
+
+  validateForm() {
+    (this as any).$refs.form.validate(
+      (valid) => {
+        console.log(valid, 11)
+      }
+    )
   }
 
   checkPrice(rule, value, callback) {
