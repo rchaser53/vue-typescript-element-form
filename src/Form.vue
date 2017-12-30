@@ -1,13 +1,13 @@
  <template>
   <el-form ref="form" v-bind:label-position="'left'" v-bind:rules="rules" :model="form" label-width="120px">
-    <el-form-item for="name" label="form.name" prop="name" >
+    <el-form-item for="name" label="name" prop="name" >
       <el-input id="name" v-model="form.name" v-on:input="setName"
           placeholder="Please input" v-bind:value="form.name"></el-input>
     </el-form-item>
 
-    <el-form-item for="nyan" label="form.nyan" prop="nyan" >
-      <el-input-number id="nyan" v-model="form.nyan" v-on:input="setNyan"
-          placeholder="Please input" v-bind:value="form.nyan"></el-input-number>
+    <el-form-item for="price" label="price" prop="price" >
+      <el-input-number id="price" v-model="form.price" v-on:input="setPrice" v-on:change="nyan"
+          placeholder="Please input" v-bind:value="form.price"></el-input-number>
     </el-form-item>
   </el-form>
 </template>
@@ -44,36 +44,34 @@ const createInputSetter = function(key: string) {
       'changeFormState',
     ]),
     setName: createInputSetter('name'),
-    setNyan: createInputSetter('nyan'),
+    setPrice: createInputSetter('price'),
   }
 })
-export default class ElForm extends Vue {
+export default class InputForm extends Vue {
   data() {
-    var checkNyan = (rule, value, callback) => {
-      console.log(value, 123)
-      setTimeout(() => {
-        if (value !== 28)  callback(new Error("why don't you nyan"));
-
-        callback();
-      }, 1000);
-    }
-
     return {
       form: {
         name: '',
-        nyan: 0
+        price: 0
       },
       rules: {
         name: [
           { required: true, message: 'Please input Activity name', trigger: 'blur' },
           { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
         ],
-        nyan: [
+        price: [
           { required: true, message: 'Please input Activity name', trigger: 'blur' },
-          { validator: checkNyan, trigger: 'blur' }
+          { validator: this.checkPrice, trigger: 'blur' }
         ]
       }
     }
+  }
+
+  checkPrice(rule, value, callback) {
+    setTimeout(() => {
+      if (value !== 28)  callback(new Error("why don't you nyan"))
+      callback()
+    }, 1000)
   }
 
   mounted() {
