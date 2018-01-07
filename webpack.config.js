@@ -33,5 +33,13 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    historyApiFallback: {
+      rewrites: [
+        { from: /vee\$/, to: '/vee' },
+        { from: /element\$/, to: '/element' },
+      ]
+    },
+  },
   devtool: 'source-map'
 }
