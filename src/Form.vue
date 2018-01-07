@@ -20,7 +20,7 @@
           placeholder="Please input" v-bind:value="form.price"></el-input-number>
     </el-form-item>
   </el-form>
-  <button @click="validateForm">validate</button>
+  <button @click="submitForm">submit</button>
 </div>
 </template>
 
@@ -88,12 +88,28 @@ export default class InputForm extends Vue {
     form: Form
   }
 
-  validateForm() {
-    this.$refs.form.validate(
-      (valid) => {
-        console.log(valid, 11)
-      }
-    )
+  async submitForm() {
+    try {
+      console.log(await this.asyncValidateForm())
+    } catch (err) {
+      console.error(err)
+    }
+
+    return 
+  }
+
+  asyncValidateForm() {
+    return new Promise((resolve, reject) => {
+      this.$refs.form.validate(
+        (isOk) => {
+          if (isOk) {
+            resolve('success')
+          } else {
+            reject('out')
+          }
+        }
+      )
+    })
   }
 
   checkPrice(rule, value, callback) {
