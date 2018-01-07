@@ -84,8 +84,12 @@ export default class InputForm extends Vue {
     }
   }
 
+  $refs: {
+    form: Form
+  }
+
   validateForm() {
-    (this as any).$refs.form.validate(
+    this.$refs.form.validate(
       (valid) => {
         console.log(valid, 11)
       }
