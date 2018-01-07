@@ -6,8 +6,17 @@
           placeholder="Please input" v-bind:value="form.name"></el-input>
     </el-form-item>
 
+    <el-form-item label="Activity zone">
+      <el-select v-model="form.region" :default-first-option="true"
+         v-on:change="setRegion" placeholder="please select your zone">
+        <el-option label="-" value="a"></el-option>
+        <el-option label="Zone one" value="shanghai"></el-option>
+        <el-option label="Zone two" value="beijing"></el-option>
+      </el-select>
+    </el-form-item>
+
     <el-form-item for="price" label="price" prop="price" >
-      <el-input-number id="price" v-model="form.price" v-on:input="setPrice" 
+      <el-input-number id="price" v-model="form.price" v-on:input="setPrice"
           placeholder="Please input" v-bind:value="form.price"></el-input-number>
     </el-form-item>
   </el-form>
@@ -21,12 +30,17 @@ import 'element-theme-chalk/lib/index'
 import Vue from 'vue'
 import { mapActions } from 'vuex'
 import Component from 'vue-class-component'
-import { parseSessionStorageValue } from './store/mutations'
+import {
+  parseSessionStorageValue,
+  initialFormValue
+} from './store/mutations'
 import {
   Form,
   FormItem,
   Input,
-  InputNumber
+  InputNumber,
+  Option,
+  Select
 } from 'element-ui'
 
 const createInputSetter = function(key: string) {
@@ -40,12 +54,15 @@ const createInputSetter = function(key: string) {
     'el-form': Form,
     'el-form-item': FormItem,
     'el-input': Input,
-    'el-input-number': InputNumber
+    'el-input-number': InputNumber,
+    'el-select': Select,
+    'el-option': Option
   },
   methods: {
     ...mapActions([
       'changeFormState',
     ]),
+    setRegion: createInputSetter('region'),
     setName: createInputSetter('name'),
     setPrice: createInputSetter('price'),
   }
@@ -53,10 +70,7 @@ const createInputSetter = function(key: string) {
 export default class InputForm extends Vue {
   data() {
     return {
-      form: {
-        name: '',
-        price: 0
-      },
+      form: initialFormValue,
       rules: {
         name: [
           { required: true, message: 'Please input Activity name', trigger: 'blur' },

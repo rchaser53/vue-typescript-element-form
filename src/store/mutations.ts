@@ -1,14 +1,18 @@
+export const initialFormValue = {
+  name: '',
+  price: 0,
+  region: ''
+}
+
 export const parseSessionStorageValue = (key: string): {[key: string]: any} => {
   const storageValue = sessionStorage.getItem(key)
-  if (storageValue == null) return {}
+  if (storageValue == null) return initialFormValue
   return JSON.parse(storageValue)
 }
 
 export const state = {
   form: parseSessionStorageValue('sampleForm')
 }
-
-// sessionStorage.clear()
 
 export const mutations = {
   changeFormState (state, obj) {
