@@ -1,13 +1,13 @@
  <template>
  <div>
-  <el-form ref="form" v-bind:label-position="'left'" v-bind:rules="rules" :model="form" label-width="120px">
+  <el-form ref="form" label-position="left" v-bind:rules="rules" :model="form" label-width="120px">
     <el-form-item for="name" label="name" prop="name" >
       <el-input id="name" v-model="form.name" v-on:input="setName"
           placeholder="Please input" v-bind:value="form.name"></el-input>
     </el-form-item>
 
     <el-form-item label="Activity zone">
-      <el-select v-model="form.region" :default-first-option="true"
+      <el-select id="region" v-model="form.region" :default-first-option="true"
          v-on:change="setRegion" placeholder="please select your zone">
         <el-option label="-" value="a"></el-option>
         <el-option label="Zone one" value="shanghai"></el-option>
@@ -20,7 +20,7 @@
           placeholder="Please input" v-bind:value="form.price"></el-input-number>
     </el-form-item>
   </el-form>
-  <button @click="submitForm">submit</button>
+  <el-button :disabled="!isSubmittable" @click="submitForm">submit</el-button>
 </div>
 </template>
 
@@ -35,6 +35,7 @@ import {
   initialFormValue
 } from './store/mutations'
 import {
+  Button,
   Form,
   FormItem,
   Input,
@@ -44,13 +45,14 @@ import {
 } from 'element-ui'
 
 const createInputSetter = function(key: string) {
-  return function(this: any, value: any) {
+  return function(this: Vue, value: any) {
     this.$store.dispatch('changeFormState', { [key]: value })
   }
 }
 
 @Component({
   components: {
+    'el-button': Button,
     'el-form': Form,
     'el-form-item': FormItem,
     'el-input': Input,
@@ -61,6 +63,7 @@ const createInputSetter = function(key: string) {
   methods: {
     ...mapActions([
       'changeFormState',
+      'changeFormValidate'
     ]),
     setRegion: createInputSetter('region'),
     setName: createInputSetter('name'),
@@ -80,7 +83,8 @@ export default class InputForm extends Vue {
           { required: true, message: 'Please input Activity name', trigger: 'blur' },
           { validator: this.checkPrice, trigger: 'blur' }
         ]
-      }
+      },
+      isSubmittable: false
     }
   }
 
@@ -94,8 +98,15 @@ export default class InputForm extends Vue {
     } catch (err) {
       console.error(err)
     }
-
     return 
+  }
+
+  async beforeUpdate() {
+    try {
+      Vue.set(this, 'isSubmittable', await this.asyncValidateForm())
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   asyncValidateForm() {
@@ -103,9 +114,9 @@ export default class InputForm extends Vue {
       this.$refs.form.validate(
         (isOk) => {
           if (isOk) {
-            resolve('success')
+            resolve(true)
           } else {
-            reject('out')
+            resolve(false)
           }
         }
       )
