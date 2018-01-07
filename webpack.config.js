@@ -7,7 +7,10 @@ module.exports = {
     filename: 'build.js'
   },
   resolve: {
-    extensions: ['.ts', '.js', '.css']
+    extensions: ['.ts', '.js', '.css'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+    }
   },
   module: {
     rules: [

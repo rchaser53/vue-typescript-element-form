@@ -3,11 +3,13 @@ import Vuex from 'vuex'
 import Form from './ElementForm.vue'
 import store from './store'
 
-Vue.use(Vuex);
+import { router } from './router'
+import App from './entry.vue'
 
-// mount
+Vue.use(Vuex)
+
 new Vue({
   el: '#app',
+  router,
   store,
-  render: h => h(Form)
 })
