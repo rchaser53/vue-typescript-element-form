@@ -21,7 +21,7 @@
     </el-form-item>
 
     <el-form-item for="date" label="date" prop="date">
-      <el-date-picker v-model="form.date" type="datetime" v-on:input="setDate" ></el-date-picker>
+      <el-date-picker ref="hoge" v-model="form.date" type="datetime" v-on:input="setDate" ></el-date-picker>
     </el-form-item>
   </el-form>
   <el-button :disabled="!isSubmittable" @click="submitForm">submit</el-button>

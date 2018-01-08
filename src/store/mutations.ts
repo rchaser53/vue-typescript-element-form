@@ -1,3 +1,5 @@
+import { parse } from 'date-fns'
+
 export const initialFormValue = {
   name: '',
   price: 0,
@@ -8,7 +10,10 @@ export const initialFormValue = {
 export const parseSessionStorageValue = (key: string): {[key: string]: any} => {
   const storageValue = sessionStorage.getItem(key)
   if (storageValue == null) return initialFormValue
-  return JSON.parse(storageValue)
+
+  let storageState = JSON.parse(storageValue)
+  storageState.date = parse(storageState.date)
+  return storageState
 }
 
 export const state = {
