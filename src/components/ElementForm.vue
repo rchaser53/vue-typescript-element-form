@@ -9,7 +9,7 @@
     <el-form-item label="Activity zone">
       <el-select id="region" v-model="form.region" :default-first-option="true"
          v-on:change="setRegion" placeholder="please select your zone">
-        <el-option label="-" value="a"></el-option>
+        <el-option label="-" value=""></el-option>
         <el-option label="Zone one" value="shanghai"></el-option>
         <el-option label="Zone two" value="beijing"></el-option>
       </el-select>
@@ -33,7 +33,7 @@ import Component from 'vue-class-component'
 import {
   parseSessionStorageValue,
   initialFormValue
-} from './store/mutations'
+} from '../store/mutations'
 import {
   Button,
   Form,
