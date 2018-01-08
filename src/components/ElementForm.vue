@@ -20,8 +20,16 @@
           placeholder="Please input" v-bind:value="form.price"></el-input-number>
     </el-form-item>
 
+    <el-form-item for="radio" label="radio" prop="radio" >
+      <el-radio-group v-model="form.radio" v-on:input="setRadio">
+        <el-radio :label="1">Option A</el-radio>
+        <el-radio :label="2">Option B</el-radio>
+        <el-radio :label="3">Option C</el-radio>
+      </el-radio-group>
+    </el-form-item>
+
     <el-form-item for="date" label="date" prop="date">
-      <el-date-picker ref="hoge" v-model="form.date" type="datetime" v-on:input="setDate" ></el-date-picker>
+      <el-date-picker id="date" v-model="form.date" type="datetime" v-on:input="setDate"></el-date-picker>
     </el-form-item>
   </el-form>
   <el-button :disabled="!isSubmittable" @click="submitForm">submit</el-button>
@@ -45,13 +53,15 @@ import {
 } from '../store/mutations'
 import {
   Button,
+  DatePicker,
   Form,
   FormItem,
   Input,
   InputNumber,
   Option,
+  Radio,
+  RadioGroup,
   Select,
-  DatePicker
 } from 'element-ui'
 
 const createInputSetter = function(key: string) {
@@ -63,23 +73,26 @@ const createInputSetter = function(key: string) {
 @Component({
   components: {
     'el-button': Button,
+    'el-date-picker': DatePicker,
     'el-form': Form,
     'el-form-item': FormItem,
     'el-input': Input,
     'el-input-number': InputNumber,
-    'el-select': Select,
     'el-option': Option,
-    'el-date-picker': DatePicker
+    'el-radio': Radio,
+    'el-radio-group': RadioGroup,
+    'el-select': Select
   },
   methods: {
     ...mapActions([
       'changeFormState',
       'changeFormValidate'
     ]),
-    setRegion: createInputSetter('region'),
-    setName: createInputSetter('name'),
-    setPrice: createInputSetter('price'),
     setDate: createInputSetter('date'),
+    setName: createInputSetter('name'),
+    setRadio: createInputSetter('radio'),
+    setRegion: createInputSetter('region'),
+    setPrice: createInputSetter('price'),
   }
 })
 export default class InputForm extends Vue {

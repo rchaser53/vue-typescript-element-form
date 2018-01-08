@@ -3,6 +3,7 @@ import { parse } from 'date-fns'
 export const initialFormValue = {
   name: '',
   price: 0,
+  radio: '',
   region: '',
   date: null
 }
