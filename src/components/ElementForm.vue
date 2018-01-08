@@ -20,7 +20,9 @@
           placeholder="Please input" v-bind:value="form.price"></el-input-number>
     </el-form-item>
 
-    <el-date-picker v-model="form.date" type="datetime"></el-date-picker>
+    <el-form-item for="date" label="date" prop="date">
+      <el-date-picker v-model="form.date" type="datetime" v-on:input="setDate" ></el-date-picker>
+    </el-form-item>
   </el-form>
   <el-button :disabled="!isSubmittable" @click="submitForm">submit</el-button>
 </div>
@@ -77,6 +79,7 @@ const createInputSetter = function(key: string) {
     setRegion: createInputSetter('region'),
     setName: createInputSetter('name'),
     setPrice: createInputSetter('price'),
+    setDate: createInputSetter('date'),
   }
 })
 export default class InputForm extends Vue {
@@ -91,6 +94,9 @@ export default class InputForm extends Vue {
         price: [
           { required: true, message: 'Please input Activity name', trigger: 'blur' },
           { validator: this.checkPrice, trigger: 'blur' }
+        ],
+        date: [
+          { required: true, message: 'Please input Date', trigger: 'blur' }
         ]
       },
       isSubmittable: false
