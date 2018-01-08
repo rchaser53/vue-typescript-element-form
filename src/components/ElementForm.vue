@@ -19,6 +19,8 @@
       <el-input-number id="price" v-model="form.price" v-on:input="setPrice"
           placeholder="Please input" v-bind:value="form.price"></el-input-number>
     </el-form-item>
+
+    <el-date-picker v-model="form.date" type="datetime"></el-date-picker>
   </el-form>
   <el-button :disabled="!isSubmittable" @click="submitForm">submit</el-button>
 </div>
@@ -26,6 +28,11 @@
 
 <script lang="ts">
 import 'element-theme-chalk/lib/index'
+
+// need to internationalization for datetimepicker
+import lang from 'element-ui/lib/locale/lang/ja'
+import locale from 'element-ui/lib/locale'
+locale.use(lang)
 
 import Vue from 'vue'
 import { mapActions } from 'vuex'
@@ -41,7 +48,8 @@ import {
   Input,
   InputNumber,
   Option,
-  Select
+  Select,
+  DatePicker
 } from 'element-ui'
 
 const createInputSetter = function(key: string) {
@@ -58,7 +66,8 @@ const createInputSetter = function(key: string) {
     'el-input': Input,
     'el-input-number': InputNumber,
     'el-select': Select,
-    'el-option': Option
+    'el-option': Option,
+    'el-date-picker': DatePicker
   },
   methods: {
     ...mapActions([

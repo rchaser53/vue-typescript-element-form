@@ -1,7 +1,8 @@
 export const initialFormValue = {
   name: '',
   price: 0,
-  region: ''
+  region: '',
+  date: ''
 }
 
 export const parseSessionStorageValue = (key: string): {[key: string]: any} => {
