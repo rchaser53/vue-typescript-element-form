@@ -1,39 +1,40 @@
  <template>
- <div>
-  <el-form ref="form" label-position="left" v-bind:rules="rules" :model="form" label-width="120px">
-    <el-form-item for="name" label="name" prop="name" >
-      <el-input id="name" v-model="form.name" v-on:input="setName"
-          placeholder="Please input" v-bind:value="form.name"></el-input>
-    </el-form-item>
+  <div>
+    <div class="error">{{errorMessage}}</div>
+    <el-form ref="form" label-position="left" v-bind:rules="rules" :model="form" label-width="120px">
+      <el-form-item for="name" label="name" prop="name" >
+        <el-input id="name" v-model="form.name" v-on:input="setName"
+            placeholder="Please input" v-bind:value="form.name"></el-input>
+      </el-form-item>
 
-    <el-form-item label="Activity zone">
-      <el-select id="region" v-model="form.region" :default-first-option="true"
-         v-on:change="setRegion" placeholder="please select your zone">
-        <el-option label="-" value=""></el-option>
-        <el-option label="Zone one" value="shanghai"></el-option>
-        <el-option label="Zone two" value="beijing"></el-option>
-      </el-select>
-    </el-form-item>
+      <el-form-item label="Activity zone">
+        <el-select id="region" v-model="form.region" :default-first-option="true"
+          v-on:change="setRegion" placeholder="please select your zone">
+          <el-option label="-" value=""></el-option>
+          <el-option label="Zone one" value="shanghai"></el-option>
+          <el-option label="Zone two" value="beijing"></el-option>
+        </el-select>
+      </el-form-item>
 
-    <el-form-item for="price" label="price" prop="price" >
-      <el-input-number id="price" v-model="form.price" v-on:input="setPrice"
-          placeholder="Please input" v-bind:value="form.price"></el-input-number>
-    </el-form-item>
+      <el-form-item for="price" label="price" prop="price" >
+        <el-input-number id="price" v-model="form.price" v-on:input="setPrice"
+            placeholder="Please input" v-bind:value="form.price"></el-input-number>
+      </el-form-item>
 
-    <el-form-item for="radio" label="radio" prop="radio" >
-      <el-radio-group v-model="form.radio" v-on:input="setRadio">
-        <el-radio :label="1">Option A</el-radio>
-        <el-radio :label="2">Option B</el-radio>
-        <el-radio :label="3">Option C</el-radio>
-      </el-radio-group>
-    </el-form-item>
+      <el-form-item for="radio" label="radio" prop="radio" >
+        <el-radio-group v-model="form.radio" v-on:input="setRadio">
+          <el-radio :label="1">Option A</el-radio>
+          <el-radio :label="2">Option B</el-radio>
+          <el-radio :label="3">Option C</el-radio>
+        </el-radio-group>
+      </el-form-item>
 
-    <el-form-item for="date" label="date" prop="date">
-      <el-date-picker id="date" v-model="form.date" type="datetime" v-on:input="setDate"></el-date-picker>
-    </el-form-item>
-  </el-form>
-  <el-button :disabled="!isSubmittable" @click="submitForm">submit</el-button>
-</div>
+      <el-form-item for="date" label="date" prop="date">
+        <el-date-picker id="date" v-model="form.date" type="datetime" v-on:input="setDate"></el-date-picker>
+      </el-form-item>
+    </el-form>
+    <el-button :disabled="!isSubmittable" @click="submitForm">submit</el-button>
+  </div>
 </template>
 
 <script lang="ts">
@@ -112,7 +113,8 @@ export default class InputForm extends Vue {
           { required: true, message: 'Please input Date', trigger: 'blur' }
         ]
       },
-      isSubmittable: false
+      isSubmittable: false,
+      errorMessage: ''
     }
   }
 
@@ -122,7 +124,9 @@ export default class InputForm extends Vue {
 
   async submitForm() {
     try {
-      console.log(await this.asyncValidateForm())
+      if (await this.asyncValidateForm() === false) return
+      Vue.set<string>(this, 'errorMessage', 'out')
+      sessionStorage.clear()
     } catch (err) {
       console.error(err)
     }
@@ -163,3 +167,9 @@ export default class InputForm extends Vue {
   }
 }
 </script>
+
+<style>
+  .error {
+    color: red;
+  }
+</style>
