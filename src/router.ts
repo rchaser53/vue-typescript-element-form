@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import ElementForm from './ElementForm.vue'
-import VeeForm from './VeeValidateForm.vue'
+import ElementForm from './components/ElementForm.vue'
+import VeeForm from './components/VeeValidateForm.vue'
 
 Vue.use(VueRouter)
 
