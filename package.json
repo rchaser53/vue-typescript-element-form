@@ -11,7 +11,7 @@
 	"scripts": {
 		"build": "tsc -p . && webpack",
 		"prettier": "prettier --write \"**/*.{md,js,ts,json}\"",
-		"server": "webpack-dev-server"
+		"start": "webpack-dev-server"
 	},
 	"dependencies": {
 		"@types/lodash": "^4.14.91",
