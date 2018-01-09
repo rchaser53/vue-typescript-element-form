@@ -36,7 +36,11 @@ module.exports = {
 	devServer: {
 		historyApiFallback: {
 			rewrites: [{ from: /vee\$/, to: '/vee' }, { from: /element\$/, to: '/element' }]
-		}
+		},
+		open: true,
+		port: 8080,
+		openPage: 'element',
+		host: "localhost",
 	},
-	devtool: 'source-map'
+	devtool: 'inline-source-map'
 };
