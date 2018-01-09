@@ -1,21 +1,16 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "es2015"
-    ],
-    "module": "es2015",
-    "moduleResolution": "node",
-    "experimentalDecorators": true,
-    "strict": true,
-    "noImplicitAny": false,
-    "noImplicitThis": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "removeComments": true
-  },
-  "include": [
-    "./**/*.ts"
-  ],
-  "compileOnSave": false
+	"compilerOptions": {
+		"target": "es5",
+		"lib": ["dom", "es2015"],
+		"module": "es2015",
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"strict": true,
+		"noImplicitAny": false,
+		"noImplicitThis": true,
+		"suppressImplicitAnyIndexErrors": true,
+		"removeComments": true
+	},
+	"include": ["./**/*.ts"],
+	"compileOnSave": false
 }

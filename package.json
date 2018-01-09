@@ -1,44 +1,46 @@
 {
-  "name": "vue-typescript-playground",
-  "description": "A Vue.js project",
-  "version": "1.0.0",
-  "author": "rchaser53 <tayoshizawa29@gmail.com>",
-  "private": true,
-  "engines": {
-    "node": ">=6",
-    "npm": ">=3"
-  },
-  "scripts": {
-    "build": "tsc -p . && webpack",
-    "server": "webpack-dev-server"
-  },
-  "dependencies": {
-    "@types/lodash": "^4.14.91",
-    "axios": "~0.17.1",
-    "date-fns": "^1.29.0",
-    "element-theme-chalk": "^2.0.10",
-    "element-ui": "^2.0.10",
-    "vee-validate": "^2.0.0",
-    "vue": "~2.5.8",
-    "vue-class-component": "~6.1.0",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
-  },
-  "devDependencies": {
-    "@types/node": "~8.0.53",
-    "cross-env": "~5.1.1",
-    "css-loader": "^0.28.7",
-    "file-loader": "^1.1.6",
-    "lodash": "^4.17.4",
-    "style-loader": "^0.19.0",
-    "ts-loader": "^3.2.0",
-    "tslint": "~5.8.0",
-    "tslint-loader": "~3.5.3",
-    "typescript": "~2.6.1",
-    "url-loader": "^0.6.2",
-    "vue-loader": "^13.6.1",
-    "vue-template-compiler": "^2.5.13",
-    "webpack": "~3.8.1",
-    "webpack-dev-server": "^2.9.7"
-  }
+	"name": "vue-typescript-playground",
+	"description": "A Vue.js project",
+	"version": "1.0.0",
+	"author": "rchaser53 <tayoshizawa29@gmail.com>",
+	"private": true,
+	"engines": {
+		"node": ">=6",
+		"npm": ">=3"
+	},
+	"scripts": {
+		"build": "tsc -p . && webpack",
+		"prettier": "prettier --write \"**/*.{md,js,ts,json}\"",
+		"server": "webpack-dev-server"
+	},
+	"dependencies": {
+		"@types/lodash": "^4.14.91",
+		"axios": "~0.17.1",
+		"date-fns": "^1.29.0",
+		"element-theme-chalk": "^2.0.10",
+		"element-ui": "^2.0.10",
+		"prettier": "^1.9.2",
+		"vee-validate": "^2.0.0",
+		"vue": "~2.5.8",
+		"vue-class-component": "~6.1.0",
+		"vue-router": "^3.0.1",
+		"vuex": "^3.0.1"
+	},
+	"devDependencies": {
+		"@types/node": "~8.0.53",
+		"cross-env": "~5.1.1",
+		"css-loader": "^0.28.7",
+		"file-loader": "^1.1.6",
+		"lodash": "^4.17.4",
+		"style-loader": "^0.19.0",
+		"ts-loader": "^3.2.0",
+		"tslint": "~5.8.0",
+		"tslint-loader": "~3.5.3",
+		"typescript": "~2.6.1",
+		"url-loader": "^0.6.2",
+		"vue-loader": "^13.6.1",
+		"vue-template-compiler": "^2.5.13",
+		"webpack": "~3.8.1",
+		"webpack-dev-server": "^2.9.7"
+	}
 }
