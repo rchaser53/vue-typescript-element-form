@@ -13,7 +13,9 @@ export const parseSessionStorageValue = (key: string): {[key: string]: any} => {
   if (storageValue == null) return initialFormValue
 
   let storageState = JSON.parse(storageValue)
-  storageState.date = parse(storageState.date)
+  storageState.date = (storageState.date == null)
+                        ? null
+                        : parse(storageState.date)
   return storageState
 }
 
