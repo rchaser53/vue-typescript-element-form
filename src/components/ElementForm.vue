@@ -162,7 +162,7 @@ export default class InputForm extends Vue {
     }, 1000)
   }
 
-  mounted() {
+  beforeMount() {
     Vue.set(this, 'form', Object.assign({}, this.$store.state.form))
   }
 }
