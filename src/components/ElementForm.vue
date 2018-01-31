@@ -33,7 +33,7 @@
         <el-date-picker id="date" v-model="form.date" type="datetime" @input="setDate"></el-date-picker>
       </el-form-item>
     </el-form>
-    <child :hoge="23"></child>
+    <child hoge="aaa"></child>
     <el-button :disabled="!isSubmittable" @click="submitForm">submit</el-button>
   </div>
 </template>
