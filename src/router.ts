@@ -11,7 +11,7 @@ Vue.use(VueRouter);
 export const router = new VueRouter({
 	mode: 'history',
 	routes: [
-		{ path: '/element', component: ElementForm },
+		{ path: '/element', component: ElementForm},
 		{ path: '/vee', component: VeeForm }
 	]
 });

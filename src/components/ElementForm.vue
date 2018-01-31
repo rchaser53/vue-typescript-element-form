@@ -33,6 +33,7 @@
         <el-date-picker id="date" v-model="form.date" type="datetime" @input="setDate"></el-date-picker>
       </el-form-item>
     </el-form>
+    <child :hoge="23"></child>
     <el-button :disabled="!isSubmittable" @click="submitForm">submit</el-button>
   </div>
 </template>
@@ -65,6 +66,8 @@ import {
   Select,
 } from 'element-ui'
 
+import Child from './Child.vue'
+
 const createInputSetter = function(key: string) {
   return function(this: Vue, value: any) {
     this.$store.dispatch('changeFormState', { [key]: value })
@@ -82,7 +85,11 @@ const createInputSetter = function(key: string) {
     'el-option': Option,
     'el-radio': Radio,
     'el-radio-group': RadioGroup,
-    'el-select': Select
+    'el-select': Select,
+    'child': Child
+  },
+  props: {
+    hoge: String
   },
   methods: {
     ...mapActions([

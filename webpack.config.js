@@ -38,7 +38,7 @@ module.exports = {
 			rewrites: [{ from: /vee\$/, to: '/vee' }, { from: /element\$/, to: '/element' }]
 		},
 		open: true,
-		port: 8080,
+		port: 3000,
 		openPage: 'element',
 		host: "localhost",
 	},
